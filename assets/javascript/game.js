@@ -9,10 +9,10 @@ var userGuess = document.createElement("p");
 var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
 
-   userGuess.textContent = document.onkeyup= function(){
+   userGuess.textContent = document.onkeyup= function(document){
    userChoicesText.appendChild(userGuess);
 
-  
+  document();
 
 
 //creating an answer array
