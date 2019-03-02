@@ -1,35 +1,49 @@
 var numGuesses = 13;
-var userGuess
-var wordArray = ["programming", "rap music", "pizza"];
-var answerArray = []
-var word = wordArray[Math.floor(Math.random() * wordArray.length)];
-for (var i = 0; i < word.length; i++) {
-    answerArray[i] = "_";
-   }
-   var remainingLetters = word.length;
+var wordArray = ["programming", "hiphop", "pizza"];
+
 var directionsText = document.getElementById("directions-text")
 var hangmanWordText = document.getElementById("hangman-word-text");
-var userChoicesText = document.getElementById("user-choices-text");
+var userChoicesText = document.getElementById("user-choices-text")
 
- 
-   // This function is run whenever the user presses a key.
-   document.onkeyup = function(event) {
-    var wordArray = wordArray[Math.floor(Math.random() * wordArray.length)];
+var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
-    // Determines which key was pressed. to lowercase?
-    var userGuess = event.key;
+document.onkeyup = function(event) {
+   var userGuess = event.key.toLowerCase;
 
-    for(var j = 0; j < wordArray.length; j++)
 
-// create an if loop that will append a letter to the hangmanWordText else decrement remaining guesses and append to userChoicesText; 
+//creating an answer array
+var answerArray = [];
+for (var i = 0; i < word.length; i++) {
+   answerArray[i] = "_";
+   }
+var remainingLetters = word.length;
 
-// if (myFarm[j].charAt(0) === "c" || myFarm[j].charAt(0) === "o") {
-//     alert("Starts with a c or an o!");
-//   }
-if (wordArray[j].char)
-numGuesses--
- 
-// Display the user's wrong choices.
-userChoicesText.textContent = userGuess;
-userChoicesText.appendChild
-}
+// if (userGuess ===  ){
+
+// }
+// else{
+//    numGuesses--;
+// }
+
+while (remainingLetters > 0) {
+    
+   //  show status
+    (answerArray.join(" "));
+
+   //  player input
+
+    var guess = prompt("Guess a letter, or click Cancel to stop playing.");
+     if (guess === null) {
+        break;
+      } 
+else if (guess.length !== 1) {
+ alert("Please enter a single letter.");
+} else {
+// Update the game state with the guess
+for (var j = 0; j < word.length; j++) {
+    if (word[j] === guess) {
+    answerArray[j] = guess;
+   remainingLetters--;
+    }
+   }
+}}}
