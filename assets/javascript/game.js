@@ -5,23 +5,25 @@ var directionsText = document.getElementById("directions-text")
 var hangmanWordText = document.getElementById("hangman-word-text");
 var userChoicesText = document.getElementById("user-choices-text")
 var userGuess = document.createElement("p");
-
 var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
+window.addEventListener("keyup", checkKeyPress);
 
-document.addEventListener("keyup", function(event) {
+function checkKeyPress(event){
+
+   // print the letter that was pressed
+
+   var guesses = window.textContent(event.key);
+   userChoicesText.appendChild(guesses);
+}
+
+   // check to see if letter is in array
+   // if letter is in wordArrary then append to hangman-word-text
+   // else decrement numGuesses and append to userChoicesText
    
-   hangmanWordText.value = hangmanWordText.value.toLowerCase();
-  
-   if(hangmanBlock.textContent = answerArray){
-      hangmanWordText.appendChild(hangmanBlock);
-
-   }
- }
 
 
-
-//creating an answer array
+    //creating an answer array
 var answerArray = [];
 for (var i = 0; i < word.length; i++) {
    answerArray[i] = "_"; 
@@ -29,7 +31,23 @@ for (var i = 0; i < word.length; i++) {
 var remainingLetters = word.length;
 
 
-hangmanBlock.textContent = answerArray;
+// Grab an element
+// var el = document.getElementById('thingy'),
+//     // Make a new div
+//     elChild = document.createElement('div');
+
+// // Give the new div some content
+// elChild.innerHTML = 'Content';
+
+// // Jug it into the parent element
+// el.appendChild(elChild);
+
+
+
+
+
+
+
 // if (userGuess ===  ){
  
 // }
@@ -44,9 +62,7 @@ while (remainingLetters > 0) {
 
    //  player input
 
-    var guess = document.createElement("p");
-      guess.textContent = "Guess a letter";
-      directionsText.appendChild(guess);
+   
 
      if (guess === null) {
         break;
@@ -64,5 +80,6 @@ for (var j = 0; j < word.length; j++) {
    remainingLetters--;
     }
    }
-}} 
 }
+}
+
