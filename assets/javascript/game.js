@@ -1,5 +1,5 @@
 var numGuesses = 13;
-var wordArray = ["programming", "hiphop", "pizza"];
+var wordArray = ["programming", "hiphop", "pizza", "vacation", "graduation", "coffee", "marketing", "basketball"];
 var hangmanBlock = document.createElement("p");
 var directionsText = document.getElementById("directions-text")
 var hangmanWordText = document.getElementById("hangman-word-text");
@@ -9,10 +9,16 @@ var userGuess = document.createElement("p");
 var word = wordArray[Math.floor(Math.random() * wordArray.length)];
 
 
-   userGuess.textContent = document.onkeyup= function(document){
-   userChoicesText.appendChild(userGuess);
+document.addEventListener("keyup", function(event) {
+   
+   hangmanWordText.value = hangmanWordText.value.toLowerCase();
+  
+   if(hangmanBlock.textContent = answerArray){
+      hangmanWordText.appendChild(hangmanBlock);
 
-  document();
+   }
+ }
+
 
 
 //creating an answer array
@@ -24,7 +30,6 @@ var remainingLetters = word.length;
 
 
 hangmanBlock.textContent = answerArray;
-hangmanWordText.appendChild(hangmanBlock);
 // if (userGuess ===  ){
  
 // }
