@@ -11,7 +11,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href ="assets/css/style.css"/>
-    <script src="assets/javascript/game.js"></script>
     <title>Hangman Challenge</title>
   </head>
   <body>
@@ -19,17 +18,23 @@
       <div class="row">
         <div class="col-6"></div>
         <div class="col-6">
-          <div class="row" id = "directions-text">
+          <div class="row" >
+              <div class="col-6"id = "directions-text">
+                <p>Press a letter to start </p>
+              </div>
+              <div class="col-6">
           </div>
           <div class="row" id ="hangman-word-text">
           </div>
           <div class="row">
-            <p class id="user-choices-text">
-              <input type = "text" size= "20" onkeyup="getChar(event)">
+            <p id="user-choices-text">
+          
             </p>
           </div>
         </div>
       </div>
     </div>
+    <script src="assets/javascript/game.js"></script>
+
   </body>
 </html>

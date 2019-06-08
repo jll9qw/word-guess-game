@@ -1,85 +1,97 @@
-var numGuesses = 13;
-var wordArray = ["programming", "hiphop", "pizza", "vacation", "graduation", "coffee", "marketing", "basketball"];
-var hangmanBlock = document.createElement("p");
-var directionsText = document.getElementById("directions-text")
-var hangmanWordText = document.getElementById("hangman-word-text");
-var userChoicesText = document.getElementById("user-choices-text")
-var userGuess = document.createElement("p");
-var word = wordArray[Math.floor(Math.random() * wordArray.length)];
+var wordIndex = 0;
+// Word bank
+var arr = ["programming", "hiphop", "pizza", "vacation", "graduation", "coffee", "marketing", "basketball"];
 
-window.addEventListener("keyup", checkKeyPress);
+//Array for letter checking
+var letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-function checkKeyPress(event){
+//Variable for user input
+var userChoicesText = document.getElementById("user-choices-text");
 
-   // print the letter that was pressed
-
-   var guesses = window.textContent(event.key);
-   userChoicesText.appendChild(guesses);
-}
-
-   // check to see if letter is in array
-   // if letter is in wordArrary then append to hangman-word-text
-   // else decrement numGuesses and append to userChoicesText
-   
+// Gennerates a random word from the word bank array
+var word = arr[Math.floor(Math.random() * arr.length)];
 
 
-    //creating an answer array
-var answerArray = [];
-for (var i = 0; i < word.length; i++) {
-   answerArray[i] = "_"; 
-   }
+// Sets the length for remaining letters
 var remainingLetters = word.length;
 
-
-// Grab an element
-// var el = document.getElementById('thingy'),
-//     // Make a new div
-//     elChild = document.createElement('div');
-
-// // Give the new div some content
-// elChild.innerHTML = 'Content';
-
-// // Jug it into the parent element
-// el.appendChild(elChild);
+// Array for answers
+var answerArray = [];
 
 
-
-
-
-
-
-// if (userGuess ===  ){
- 
-// }
-// else{
-//    numGuesses--;
-// }
-
-while (remainingLetters > 0) {
-    
-   //  show status
-    (answerArray.join(" "));
-
-   //  player input
-
+// Logs the user input User's input 
+document.onkeyup = function(event) {
    
-
-     if (guess === null) {
-        break;
-      } 
-else if  (guess.length !== 1) {
-   userChoicesText.textContent =
-    
  
-   ("Please enter a single letter.");
-} else {
-// Update the game state with the guess
-for (var j = 0; j < word.length; j++) {
-    if (word[j] === guess) {
-    answerArray[j] = guess;
-   remainingLetters--;
-    }
+   userChoicesText.textContent = event.key;
+   console.log(userChoicesText.textContent);
+
+// Converts the word bank to a string of letters
+   for (var i = 0; i < word.length; i++) {
+      if (word[i] === "+") {
+          answerArray[i] = "&nbsp;";
+      } else {
+          //Replace word answer with "_"s
+          answerArray[i] = "_";
+      }
+
+// Checks if letter pressed is in the answer
+function letterGuess(guess){
+   if (letterArr.indexOf(guess.key > -1)){
+      correctCheckGuess(guess)
+   } 
+}
+
+letterGuess();
+function correctGuess(guess) {
+   if (answerArray.indexOf(guess.key.toUpperCase()) < 0) {
+       addCorrectLetter(guess);
+   }
+}
+correctGuess();
+
+function addCorrectLetter(guess) {
+   for (var i = 0; i < word.length; i++) {
+       //If guess matches an existing letter in the answer.
+       if (guess.key === word[i]) {
+           //Push correct letter to answerArray as upperCase.
+           answerArray[i] = guess.key.toUpperCase();
+           showWord();
+           //Reduce letters remaining for win by one.
+           remainingLetters--;
+           //If letters left has reached 0, user wins. 
+           if (remainingLetters === 0) {
+               //Add 1 to win score.
+               winScore++;
+            
+           }
+       }
    }
 }
 }
+}
+
+// function showWord() {
+//    var currentWordDisplay = document.querySelector("#hangman-word-text");
+//    currentWordDisplay.innerHTML = answerArray.join(" ");
+// };
+
+
+// function displayWins() {
+//    var winsDisplay = document.querySelector("#winsDisplay");
+//    winsDisplay.textContent = winScore;
+// };
+
+// //Displays the letters the user has guessed.
+// function displayGuessesMade() {
+//    var guessesMadeDisplay = document.querySelector("#user-choices-text");
+//    guessesMadeDisplay.textContent = incorrectGuessesMade.join(", ");
+// };
+
+// //Displays how many user guesses are left.
+// function displayGuessesLeft() {
+//    var guessesLeftDisplay = document.querySelector("#guessesLeftDisplay");
+//    guessesLeftDisplay.textContent = guessesLeft;
+
+   
 
