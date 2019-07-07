@@ -1,22 +1,41 @@
-var wordIndex = 0;
+let wordIndex = 0;
+let wins = 0;
+let losses = 0;
+
+
 // Word bank
-var arr = ["programming", "hiphop", "pizza", "vacation", "graduation", "coffee", "marketing", "basketball"];
+let arr = ["celtics", "nets", "knicks", "sixers", "raptors", "bulls", "cavs", "pistons", "pacers", "bucks", "hawks", "hornets", "heat", "magic", "wizards", "nuggets", "timberwolves", "thunder", "trailblazers", "jazz", "warriors", "clippers", "lakers", "suns", "kings", "mavericks", "rockets", "grizzlies", "pelicans", "spurs"];
 
 //Array for letter checking
-var letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+
+
+let letterPlaceholders = []
+let guessedLetters =[]
 
 //Variable for user input
-var userChoicesText = document.getElementById("user-choices-text");
+let userChoicesText = document.getElementById("user-choices-text");
+
 
 // Gennerates a random word from the word bank array
-var word = arr[Math.floor(Math.random() * arr.length)];
+let word = arr[Math.floor(Math.random() * arr.length)];
+
+//create placeholders
+for (var i = 0; i < word.length; i++) {
+    if (word[i] === " ") {
+      letterPlaceholders.push(" ");
+    } else {
+      letterPlaceholders.push("_");
+    }
+  }
 
 
 // Sets the length for remaining letters
-var remainingLetters = word.length;
+let remainingLetters = word.length;
 
 // Array for answers
-var answerArray = [];
+let answerArray = [];
 
 
 // Logs the user input User's input 
