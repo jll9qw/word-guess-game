@@ -1,21 +1,35 @@
-let wordIndex = 0;
-let wins = 0;
-let losses = 0;
+// Game counters
+var winCounter = 0;
+var lossCounter = 0;
+var numGuesses = 9;
+
 
 
 // Word bank
 let arr = ["celtics", "nets", "knicks", "sixers", "raptors", "bulls", "cavs", "pistons", "pacers", "bucks", "hawks", "hornets", "heat", "magic", "wizards", "nuggets", "timberwolves", "thunder", "trailblazers", "jazz", "warriors", "clippers", "lakers", "suns", "kings", "mavericks", "rockets", "grizzlies", "pelicans", "spurs"];
 
+
+// Randomly chosen word from the array
+let chosenWord = "";
+
+
+// This will break the solution into individual letters to be stored in array.
+let lettersInChosenWord = [];
+
+// This will be the number of blanks we show based on the solution.
+let numBlanks = 0;
+
+// Holds a mix of blank and solved letters (ex: 'n, _ _, n, _').
+let blanksAndSuccesses = [];
+
+
+let guessedLetters =[]
+
 //Array for letter checking
 let letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 
-// reset game function
-function reset(){
-    let letterPlaceholders = []
-    let guessedLetters =[]
 
-}
 
 
 //Variable for user input
@@ -28,9 +42,9 @@ let word = arr[Math.floor(Math.random() * arr.length)];
 //create placeholders
 for (var i = 0; i < word.length; i++) {
     if (word[i] === " ") {
-      letterPlaceholders.push(" ");
+      numBlanks.push(" ");
     } else {
-      letterPlaceholders.push("_");
+      numBlanks.push("_");
     }
   }
 
