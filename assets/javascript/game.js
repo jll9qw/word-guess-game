@@ -3,15 +3,11 @@ var winCounter = 0;
 var lossCounter = 0;
 var numGuesses = 9;
 
-
-
 // Word bank
 let arr = ["celtics", "nets", "knicks", "sixers", "raptors", "bulls", "cavs", "pistons", "pacers", "bucks", "hawks", "hornets", "heat", "magic", "wizards", "nuggets", "timberwolves", "thunder", "trailblazers", "jazz", "warriors", "clippers", "lakers", "suns", "kings", "mavericks", "rockets", "grizzlies", "pelicans", "spurs"];
 
-
 // Randomly chosen word from the array
 let chosenWord = "";
-
 
 // This will break the solution into individual letters to be stored in array.
 let lettersInChosenWord = [];
@@ -22,113 +18,154 @@ let numBlanks = 0;
 // Holds a mix of blank and solved letters (ex: 'n, _ _, n, _').
 let blanksAndSuccesses = [];
 
-
-let guessedLetters =[]
-
-//Array for letter checking
-let letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
-
-
-
+let wrongGuesses =[]
 
 //Variable for user input
 let userChoicesText = document.getElementById("user-choices-text");
+let lettersGuessed = ""
 
+function startGame() {
 
-// Gennerates a random word from the word bank array
-let word = arr[Math.floor(Math.random() * arr.length)];
-
-//create placeholders
-for (var i = 0; i < word.length; i++) {
-    if (word[i] === " ") {
-      numBlanks.push(" ");
-    } else {
-      numBlanks.push("_");
+    // Reset the guesses back to 0.
+    numGuesses = 9;
+  
+    // Solution chosen randomly from arr.
+    chosenWord = arr[Math.floor(Math.random() * arr.length)];
+  
+    lettersInChosenWord = chosenWord.split("");
+  
+    numBlanks = lettersInChosenWord.length;
+  
+    console.log(chosenWord);
+    blanksAndSuccesses = [];
+    wrongGuesses = [];
+  
+    for (var i = 0; i < numBlanks; i++) {
+      blanksAndSuccesses.push("_");
     }
+  
+    // Print the initial blanks in console.
+    console.log(blanksAndSuccesses);
+  
+    // Reprints the guessesLeft to 9.
+    document.getElementById("guesses-left").innerHTML = numGuesses;
+  
+    // Prints the blanks at the beginning of each round in the HTML.
+    document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  
+    // Clears the wrong guesses from the previous round.
+    document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
   }
-
-
-// Sets the length for remaining letters
-let remainingLetters = word.length;
-
-// Array for answers
-let answerArray = [];
-
-
-// Logs the user input User's input 
-document.onkeyup = function(event) {
-   
- 
-   userChoicesText.textContent = event.key;
-   console.log(userChoicesText.textContent);
-
-// Converts the word bank to a string of letters
-   for (var i = 0; i < word.length; i++) {
-      if (word[i] === "+") {
-          answerArray[i] = "&nbsp;";
-      } else {
-          //Replace word answer with "_"s
-          answerArray[i] = "_";
+  
+  function checkLetters(letter) {
+  
+    // This boolean will be toggled based on whether or not
+    // a user letter is found anywhere in the word.
+    var letterInWord = false;
+  
+    // Check if a letter exists inside the array at all.
+    for (var i = 0; i < numBlanks; i++) {
+  
+      if (chosenWord[i] === letter) {
+  
+        letterInWord = true;
       }
+    }
+  
+    if (letterInWord) {
+  
+      // Loop through the word
+      for (var j = 0; j < numBlanks; j++) {
+  
+        // Populate the blanksAndSuccesses with every instance of the letter.
+        if (chosenWord[j] === letter) {
+  
+          // Here we set specific blank spaces to equal the correct letter
+          // when there is a match.
+          blanksAndSuccesses[j] = letter;
+        }
+      }
+  
+      // Log the current blanks and successes for testing.
+      console.log(blanksAndSuccesses);
+    }
+  
+    // If the letter doesn't exist at all...
+    else {
+  
+      // Then we add the letter to the list of wrong letters.
+      wrongGuesses.push(letter);
+  
+      // We also subtract one of the guesses.
+      numGuesses--;
+  
+    }
+  
+  }
+  
+  function roundComplete() {
+  
+    console.log("WinCount: " + winCounter + " | LossCount: " + lossCounter + " | NumGuesses: " + numGuesses);
+  
+    // HTML UPDATES
+    // ============
+  
+    // Update the HTML to reflect the new number of guesses.
+    document.getElementById("guesses-left").innerHTML = numGuesses;
+  
+    // This will print the array of guesses and blanks onto the page.
+    document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  
+    // This will print the wrong guesses onto the page.
+    document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+  
+    // If our Word Guess string equals the solution.
+    // (meaning that we guessed all the letters to match the solution)...
+    if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
+  
+      // Add to the win counter
+      winCounter++;
+  
+      // Give the user an alert
+      alert("You win!");
+  
+      // Update the win counter in the HTML
+      document.getElementById("wins").innerHTML = winCounter;
+  
+      // Restart the game
+      startGame();
+    }
+  
+    else if (numGuesses === 0) {
+  
+      // Add to the loss counter
+      lossCounter++;
+  
+      // Give the user an alert
+      alert("You lose");
+  
+      // Update the loss counter in the HTML
+      document.getElementById("losses").innerHTML = lossCounter;
+  
+      // Restart the game
+      startGame();
+  
+    }
+  
+  }
+  
 
-// Checks if letter pressed is in the answer
-function letterGuess(guess){
-   if (letterArr.indexOf(guess.key > -1)){
-      correctCheckGuess(guess)
-   } 
-}
-
-letterGuess();
-function correctGuess(guess) {
-   if (answerArray.indexOf(guess.key.toUpperCase()) < 0) {
-       addCorrectLetter(guess);
-   }
-}
-correctGuess();
-
-function addCorrectLetter(guess) {
-   for (var i = 0; i < word.length; i++) {
-       //If guess matches an existing letter in the answer.
-       if (guess.key === word[i]) {
-           //Push correct letter to answerArray as upperCase.
-           answerArray[i] = guess.key.toUpperCase();
-           showWord();
-           //Reduce letters remaining for win by one.
-           remainingLetters--;
-           //If letters left has reached 0, user wins. 
-           if (remainingLetters === 0) {
-               //Add 1 to win score.
-               winScore++;
-            
-           }
-       }
-   }
-}
-}
-}
-
-// function showWord() {
-//    var currentWordDisplay = document.querySelector("#hangman-word-text");
-//    currentWordDisplay.innerHTML = answerArray.join(" ");
-// };
-
-
-// function displayWins() {
-//    var winsDisplay = document.querySelector("#winsDisplay");
-//    winsDisplay.textContent = winScore;
-// };
-
-// //Displays the letters the user has guessed.
-// function displayGuessesMade() {
-//    var guessesMadeDisplay = document.querySelector("#user-choices-text");
-//    guessesMadeDisplay.textContent = incorrectGuessesMade.join(", ");
-// };
-
-// //Displays how many user guesses are left.
-// function displayGuessesLeft() {
-//    var guessesLeftDisplay = document.querySelector("#guessesLeftDisplay");
-//    guessesLeftDisplay.textContent = guessesLeft;
-
-   
-
+  startGame();
+  
+  // Then initiates the function for capturing key clicks.
+  document.onkeyup = function(event) {
+  event.preventDefault();
+    // Converts all key clicks to lowercase letters.
+    letterGuessed = String.fromCharCode(event.which).toLowerCase();
+  
+    // Runs the code to check for correct guesses.
+    checkLetters(letterGuessed);
+  
+    // Runs the code that ends each round.
+    roundComplete();
+  };  

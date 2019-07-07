@@ -1,4 +1,10 @@
 
 .card{
 background-color: rgb(231, 25, 25);
+color: white;
+};
+
+#directions-text{
+    background-color: url(/assets/images/nba_logo.jpg);
+    background-repeat: no-repeat;
 };

@@ -16,19 +16,21 @@
   <body>
       <div class="jumbotron jumbotron-fluid" id= "directions-text">
           <div class="container">
-            <h1 class="display-4">Word Guess Game</h1>
-            <p class="lead">Press a letter to start</p>
+            <h1 class="display-4">NBA Franchise Guess Game</h1>
+            <p class="lead"></p>
+            <h2 id="word-blanks">_ _ _ _ _ _ _ _ _ </h2>
           </div>
-          <span id="hangman-word-text"></span>
+              
         </div>
     <div class="container">
         <div class="row">
             <div class="col-6">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
+                        <p class="card-text" id="user-choices-text"> In this hangman-like word game, press a letter to start. You have 10 chances to reveal the letters in the NBA teamname. Good Luck! </p>
+
                       <h5 class="card-title">Guessed Letters</h5>
-                      <h6 class="card-subtitle mb-2 text-muted"></h6>
-                      <p class="card-text" id="user-choices-text"></p>
+                      <span id="wrong-guesses"></span></h6>
                     </div>
                   </div>
             </div>
@@ -36,9 +38,9 @@
                 <div class="card" class="game-data" style="width: 18rem;">
                     <div class="card-body">
                       <h4 class="card-title">Score</h5>
-                      <h6>Wins: <span id="wins"></span></h3>
-                        <h6>Losses: <span id="losses"></span></h3>
-                          <h6>Guesses Left: <span id="guesses-left"></span></h3>
+                      <h6>Wins: <span id="wins"></span></h6>
+                        <h6>Losses: <span id="losses"></span></h6>
+                          <h6>Guesses Left: <span id="guesses-left"></span></h6>
                     </div>
                   </div>
             </div>
