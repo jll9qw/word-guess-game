@@ -1,10 +1,10 @@
+#logo{
+    background-image: linear-gradient(rgba(0, 0, 255, 0.5), rgba(243, 35, 17, 0.856)), url(/assets/images/nba_logo.jpg);
+   border: 0em;
+   color: azure;
+}
 
 .card{
 background-color: rgb(231, 25, 25);
 color: white;
-};
-
-#directions-text{
-    background-color: url(/assets/images/nba_logo.jpg);
-    background-repeat: no-repeat;
-};
+}
