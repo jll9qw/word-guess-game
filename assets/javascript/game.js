@@ -10,9 +10,13 @@ let arr = ["celtics", "nets", "knicks", "sixers", "raptors", "bulls", "cavs", "p
 let letterArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 
+// reset game function
+function reset(){
+    let letterPlaceholders = []
+    let guessedLetters =[]
 
-let letterPlaceholders = []
-let guessedLetters =[]
+}
+
 
 //Variable for user input
 let userChoicesText = document.getElementById("user-choices-text");
